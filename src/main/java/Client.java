@@ -15,6 +15,7 @@ public class Client extends JFrame {
     private Socket socket;
 
     private JTextArea chatArea;
+    private JTextArea infoArea;
 
     private JTextField inputField;
 
@@ -37,19 +38,23 @@ public class Client extends JFrame {
         setBounds(600, 300, 500, 500);
         setTitle("Client");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setBounds(600,300,500,200);
+        infoArea = new JTextArea();
+        infoArea.append("Для входа в чат авторизуйтесь с помощью команды  /auth. \nДоступны 3 пользователя где \nлогин/пароль login1/pass1, login2/pass2, login3/pass3.\nПример: /auth login1 pass1");
+        dialog.add(infoArea, BorderLayout.CENTER);
+        dialog.setEnabled(false);
+        dialog.setVisible(true);
 
         //Message area
         chatArea = new JTextArea();
-        DefaultCaret caret = (DefaultCaret) chatArea.getCaret();         //авто скрол
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);              //авто скрол
+        DefaultCaret caret = (DefaultCaret) chatArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         chatArea.setEditable(false);
         chatArea.setLineWrap(true);
 
-
         add(new JScrollPane(chatArea), BorderLayout.CENTER);
 
-
-        //down pannel
         JPanel panel = new JPanel(new BorderLayout());
         JButton sendButton = new JButton("Send");
         panel.add(sendButton, BorderLayout.EAST);

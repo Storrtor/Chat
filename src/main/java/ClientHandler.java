@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -47,6 +48,7 @@ public class ClientHandler {
                 @Override
                 public void run() {
                     try {
+
                         authentication();
                         instructions();
                         readMessages();
